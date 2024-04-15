@@ -1,4 +1,4 @@
-//1) CRUD OPERATIONS WITH OBJECTS
+//* CRUD OPERATIONS WITH OBJECTS
 //a) CREATE OBJECT USING CONST IDENTIFIER = {}
 const car = {
     brandName: "Lamborghini",
@@ -41,6 +41,13 @@ const teacher = {
 
 alert(teacher.age()); //12
 alert(teacher.old()); //NaN
+
+// Q) 1.Print (console.log()) value of the property "name" in the given object:
+let student = {
+    name:"Max",
+    age: 27
+};
+console.log(student.name);
 
 // Q) 2a. Find the value of the price property and if it is greater than 100, discount it by 10%. If that’s not the case, discount it by 7%. b. Update the object with the new property - discount and the corresponding value (7% or 10%) and the new price.
 let product = {
