@@ -55,6 +55,7 @@ const arr = testString.split(',');
 console.log(arr); // Output: ["1", "2"]
 
 //Q) Sort In Ascending order according to age
+//1) function logic
 const people = [
     {name: "raktim", age: 10}, 
     {name: "sita", age: 20},
@@ -78,14 +79,13 @@ const output = common.toString();
 console.log(output);
 
 //11) Using Includes Method
-let compare; //Output
+let compare = ""; //Output
 for(let i = 0; i < food2.length; i++){
     if(food.includes(food2[i])){
-        compare = food2[i];
+        compare += food2[i] + " "; //Concat String 
     }
 }
 console.log(compare);
-
 
 //Arrays Questions In JS
 
@@ -116,8 +116,83 @@ const minMax = (array) => {
 }
 console.log(minMax(array));
 
-//4) 
+//4) Write a program to reverse an array of integer values.
+const revArray = (array) => {
+    return array.reverse();
+}
+console.log(revArray(array));
 
+//5) Write a program to find the second largest array element.
+//a) Logic 1 : sort((a,b) => a - b)
+const secondLargest = (array) => {
+    const sortedArray = array.sort((a,b) => a - b); //Bubble Sort In Ascending
+    let secondL = sortedArray[sortedArray.length - 2];
+    return secondL;
+}
+const newArray = [50, 10, 20, 30, 60, 40];
+console.log(secondLargest(newArray));
+//b) Logic 2 : Bubble Sorting For Ascending Order:
+const bubbleSort = (array) => {
+    let swap;
+    for(let i = 0; i < array.length; i++){
+        for(let j = i+1; j < array.length; j++){
+            if(array[i] > array[j]){
+                swap = array[i];
+                array[i] = array[j];
+                array[j] = swap;
+            }
+        }
+    }
+    return array[array.length - 2];
+}
+console.log(bubbleSort(newArray));
+
+//6) Write a JS program to find the sum of the two elements of a given array equal to a given integer. Eg: Sample array: [1,2,4,5,6] Target value: 6.
+const checkSum = (array, num) => {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = i + 1; j < array.length; j++) {
+            if (num === array[i] + array[j]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const checkArray = [1, 2, 4, 5, 6];
+console.log(checkSum(checkArray, 6));
+
+// 7) Square and sum the array elements using the arrow function and then find the average of the array.
+const sumSquareArray = (array) => {
+    let sum = 0;
+    for(let i = 0; i < array.length; i++){
+        sum += array[i] * array[i]; //Can Use Math.pow function also!
+    }
+    return sum;
+}
+console.log(sumSquareArray(checkArray));
+
+// 8) Create a new array whose elements is in uppercase of words present in the original array.
+const upperArray = (array) => {
+    const newArr = [];
+    for(let i = 0; i < array.length; i++){
+        newArr.push(array[i].toUpperCase());
+    }
+    return newArr;
+}
+const strArr = ["a", "e", "i", "o", "u"];
+console.log(upperArray(strArr)); // Output: ["A", "E", "I", "O", "U"]
+
+//9) Write a function Myfunc that takes in an array of numbers and multiply each of the elements by 2.
+const Myfunc = (array) => {
+    for (let i in array) {
+        array[i] = array[i] * 2;
+    }
+    return array;
+}
+
+const numb = [4, 6, 8, 10];
+console.log(Myfunc(numb)); // Output: [8, 12, 16, 20]
 
 
 
