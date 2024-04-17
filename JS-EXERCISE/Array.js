@@ -63,6 +63,7 @@ const people = [
 people.sort((a,b) => a.age - b.age); //For Ascending a - b because for -ve the value a will be sorted before b, +ve then b is sorted before a and in this case: a => 10 and b => 20 a-b => -ve a is before so ascending if b-a => 10 which will make b before a i.e. descending order.
 console.log(people);
 
+
 //Q) 11 Compare the 2 arrays and find common food if any
 let food = ['Noodle', 'Pasta', 'Ice-Cream'];
 let food2 = ['Fries', 'Ice-Cream', 'Pizza'];
