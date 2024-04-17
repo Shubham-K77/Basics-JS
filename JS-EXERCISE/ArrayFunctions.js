@@ -66,6 +66,27 @@ const returnTotalMass = (array) => {
     }, 0); // Initialize the accumulator to 0
 };
 console.log(returnTotalMass(characters)); // Output: Total mass of all characters
+//2. Get total height of all characters
+const returnTotalHeight = (array) => {
+    return array.reduce((sum, item) => {
+        return sum + item.height;
+    }, 0); 
+}
+console.log(returnTotalHeight(characters));
+//3. Get total number of characters by eye color
+const totalCharByEyeColor = (array) => {
+    return array.reduce((count, item) => {
+        return count + item.eye_color.length;
+    }, 0)
+}
+console.log(totalCharByEyeColor(characters));
+//4. Get total number of characters in all the character names
+const totalCharByName = (array) => {
+    return array.reduce((sum, item) => {
+        return sum + item.name.length;
+    }, 0);
+}
+console.log(totalCharByName(characters));
 
 
 //***FILTER***
@@ -136,3 +157,49 @@ const sortGenderDesc = (array) => {
     return array.sort((a, b) => b.gender.localeCompare(a.gender));
 }
 console.log(sortGenderDesc(characters));
+
+
+//***EVERY***
+//1. Does every character have blue eyes?
+const everyBlueEyes = (array) => {
+    return array.every((item) => item.eye_color === 'blue');
+}
+console.log(everyBlueEyes(characters));
+//2. Does every character have mass more than 40?
+const everyMass40 = (array) => {
+    return array.every((item) => item.mass > 40);
+}
+console.log(everyMass40(characters));
+//3. Is every character shorter than 200?
+const everyHeightLT200 = (array) => {
+    return array.every((item) => item.height < 200);
+}
+console.log(everyHeightLT200(characters));
+//4. Is every character male?
+const everyCharMale = (array) => {
+    return array.every((item) => item.gender === 'male');
+}
+console.log(everyCharMale(characters));
+
+
+//***SOME***
+//1. Is there at least one male character?
+const atleastOneMale = (array) => {
+    return array.some((item) => item.gender === 'male');
+}
+console.log(atleastOneMale(characters));
+//2. Is there at least one character with blue eyes?
+const atleastOneBEyes = (array) => {
+    return array.some((item) => item.eye_color === 'blue');
+}
+console.log(atleastOneBEyes(characters));
+//3. Is there at least one character taller than 210?
+const atleastOneHeightGT210 = (array) => {
+    return array.some((item) => item.height > 210);
+}
+console.log(atleastOneHeightGT210(characters));
+//4. Is there at least one character that has mass less than 50?
+const atleastOneMassLT50 = (array) => {
+    return array.some((item) => item.mass < 50);
+}
+console.log(atleastOneMassLT50(characters));
