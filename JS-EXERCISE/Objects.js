@@ -118,3 +118,21 @@ let range = {
     }
 };
 console.log(range.check(44));
+
+// Q 4) Object That Finds The Perimeter And Area Of Circle Using Functions
+const PI = 3.14; // PI Value
+const propertyCircle = {
+    area: null,
+    perimeter: null,
+    areaCalc: function(radius) {
+        this.area = PI * radius * radius;
+        return this.area;
+    },
+    periCalc: function(radius) {
+        this.perimeter = 2 * PI * radius;
+        return this.perimeter;
+    }
+};
+
+console.log(propertyCircle.areaCalc(4)); // Output: 50.24 (approx.)
+console.log(propertyCircle.periCalc(4)); // Output: 25.12 (approx.)
