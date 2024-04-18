@@ -79,6 +79,19 @@ const totalCharByEyeColor = (array) => {
         return count + item.eye_color.length;
     }, 0)
 }
+//Solution: blue: 2, yellow: 1, brown: 1
+const totEyeColor = (array) => {
+    return array.reduce((newObj, item) => {
+        if (newObj[item.eye_color]) {
+            newObj[item.eye_color]++;
+        } else {
+            newObj[item.eye_color] = 1;
+        }
+        return newObj;
+    }, {});
+};
+console.log(totEyeColor(characters));
+
 console.log(totalCharByEyeColor(characters));
 //4. Get total number of characters in all the character names
 const totalCharByName = (array) => {
