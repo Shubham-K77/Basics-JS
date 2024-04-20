@@ -30,189 +30,174 @@ const characters = [
     },
 ];
 
-//***MAP***
+//***MAP*** Keyword: All
+/*
+The map() function in JavaScript is a method that operates on arrays and is used to transform each element of the array by applying a provided function to it. It creates a new array containing the results of calling the provided function on every element in the original array. 
+*/
 //1. Get array of all names
-const returnName = (array) => {
+const allNames = (array) => {
     return array.map((item) => item.name);
 }
-console.log(returnName(characters));
+console.log(allNames(characters));
 //2. Get array of all heights
-const returnHeight = (array) => {
+const allHeights = (array) => {
     return array.map((item) => item.height);
 }
-console.log(returnHeight(characters));
+console.log(allHeights(characters));
 //3. Get array of objects with just name and height properties
-const returnObj = (array) => {
+const nameAndHeight = (array) => {
     return array.map((item) => {
-        return{
+        return {
             name: item.name,
             height: item.height
-        };
+        }
     });
 }
-console.log(returnObj(characters));
+console.log(nameAndHeight(characters));
 //4. Get array of all first names
-const returnFirstName = (array) => {
-    return array.map((item) => item.name.split(' ')[0]);
+const firstNames = (array) => {
+    return array.map((item) => item.name.split(" ")[0]);
 }
-console.log(returnFirstName(characters));
+console.log(firstNames(characters));
 
-
-//***REDUCE***
+//***REDUCE*** Keyword: return Sum
+/*
+The reduce() method in JavaScript is used to reduce an array to a single value, based on the logic provided in a callback function. It iterates over each element of the array and applies the callback function to accumulate a result. The result could be of any type: a number, a string, an object, or even another array.
+*/
 //1. Get total mass of all characters
-const returnTotalMass = (array) => {
-    return array.reduce((sum, item) => {
-        return sum + item.mass;
-    }, 0); // Initialize the accumulator to 0
-};
-console.log(returnTotalMass(characters)); // Output: Total mass of all characters
+const totalMass = (array) => {
+    return array.reduce((sum, item) => {return sum + item.mass}, 0);
+}
+console.log(totalMass(characters));
 //2. Get total height of all characters
-const returnTotalHeight = (array) => {
-    return array.reduce((sum, item) => {
-        return sum + item.height;
-    }, 0); 
+const totalHeights = (array) => {
+    return array.reduce((sum, item) => {return sum + item.height}, 0);
 }
-console.log(returnTotalHeight(characters));
+console.log(totalHeights(characters));
 //3. Get total number of characters by eye color
-const totalCharByEyeColor = (array) => {
-    return array.reduce((count, item) => {
-        return count + item.eye_color.length;
-    }, 0)
-}
-//Solution: blue: 2, yellow: 1, brown: 1
-const totEyeColor = (array) => {
-    return array.reduce((newObj, item) => {
-        if (newObj[item.eye_color]) {
-            newObj[item.eye_color]++;
-        } else {
-            newObj[item.eye_color] = 1;
+const totalEyeColor = (array) => {
+    return array.reduce((result, item) => {
+        if(result[item.eye_color]){
+            result[item.eye_color]++;
         }
-        return newObj;
+        else{
+            result[item.eye_color] = 1;
+        }
+        return result;
+    }, {});
+}
+console.log(totalEyeColor(characters));
+//4. Get total number of characters in all the character names
+//Output = {Anakin Skywalker: 22, Luke Skywalker: 18, ...}
+const countCharacters = (array) => {
+    return array.reduce((result, item) => {
+        let characterName = item.name;
+        result[characterName] = item.name.length;
+        return result; 
     }, {});
 };
-console.log(totEyeColor(characters));
+console.log(countCharacters(characters));
 
-console.log(totalCharByEyeColor(characters));
-//4. Get total number of characters in all the character names
-const totalCharByName = (array) => {
-    return array.reduce((sum, item) => {
-        return sum + item.name.length;
-    }, 0);
-}
-console.log(totalCharByName(characters));
-
-
-//***FILTER***
+//***FILTER*** Keyword: Conditions
+/* 
+The filter() function in JavaScript is used to create a new array with elements that pass a certain condition. It iterates over each element of the array and applies a callback function to determine whether the element should be included in the resulting array. The callback function returns true to include the element in the new array or false to exclude it.
+*/
 //1. Get characters with mass greater than 100
-const returnTotalMassGT100 = (array) => {
+const massGt100 = (array) => {
     return array.filter((item) => item.mass > 100);
 }
-console.log(returnTotalMassGT100(characters));
+console.log(massGt100(characters));
 //2. Get characters with height less than 200
-const returnHeightLT200 = (array) => {
+const heightLt200 = (array) => {
     return array.filter((item) => item.height < 200);
 }
-console.log(returnHeightLT200(characters));
+console.log(heightLt200(characters));
 //3. Get all male characters
-const returnMale = (array) => {
+const allMale = (array) => {
     return array.filter((item) => item.gender === 'male');
 }
-console.log(returnMale(characters));
+console.log(allMale(characters));
 //4. Get all female characters
-const returnFemale = (array) => {
+const allFemale = (array) => {
     return array.filter((item) => item.gender === 'female');
 }
-console.log(returnFemale(characters));
+console.log(allFemale(characters));
 
-
-//***SORT***
+//***SORT*** //Keyword: Ascending, Descending
+/* 
+The sort() method in JavaScript is used to sort the elements of an array in place and returns the sorted array. It arranges the elements of the array according to the return value of the sorting function provided or based on their string Unicode code points by default.
+*/
+//Comparison Function Logic: a-b => suppose a = 10, b = 5 then a -b => 5 [+ve] Then [5,10] ascending sorting again if b-a => -5 [-ve] Then [10, 5] descending sorting
+// If +ve => [b,a]
+// If -ve => [a,b]
+//If 0 => [a,b]
 //1. Sort by mass
-//a. ascending
-const sortMassAsc = (array) => {
-    return array.sort((a, b) => a.mass - b.mass);
+const ascMass = (array) => {
+    return array.sort((a,b) => a.mass - b.mass);
 }
-console.log(sortMassAsc(characters));
-//b. descending
-const sortMassDesc = (array) => {
-    return array.sort((a, b) => b.mass - a.mass);
-}
-console.log(sortMassDesc(characters));
+console.log(ascMass(characters));
 //2. Sort by height
-//a. ascending
-const sortHeightAsc = (array) => {
+const ascHeight = (array) => {
     return array.sort((a,b) => a.height - b.height);
 }
-console.log(sortHeightAsc(characters));
-//b. descending
-const sortHeightDesc = (array) => {
-    return array.sort((a,b) => b.height - a.height);
-}
-console.log(sortHeightDesc(characters));
+console.log(ascHeight(characters));
 //3. Sort by name
-//a. ascending
-const sortNameAsc = (array) => {
-    return array.sort((a,b) => a.name.localeCompare(b.name));
-} 
-console.log(sortNameAsc(characters));
-//b. descending
-const sortNameDesc = (array) => {
+const descName = (array) => {
     return array.sort((a,b) => b.name.localeCompare(a.name));
-} 
-console.log(sortNameDesc(characters));
+}
+console.log(descName(characters));
 //4. Sort by gender
-//a. ascending
-const sortGenderAsc = (array) => {
-    return array.sort((a, b) => a.gender.localeCompare(b.gender));
+const ascGender = (array) => {
+    return array.sort((a,b) => b.gender.localeCompare(a.gender));
 }
-console.log(sortGenderAsc(characters));
-//b. descending
-const sortGenderDesc = (array) => {
-    return array.sort((a, b) => b.gender.localeCompare(a.gender));
-}
-console.log(sortGenderDesc(characters));
+console.log(ascGender(characters));
 
-
-//***EVERY***
+//***EVERY*** //Keyword: every condition
+/* 
+The every() method tests whether all elements in the array pass the test implemented by the provided function. It iterates over each element of the array and applies the provided function to each element. If the function returns true for all elements, every() returns true; otherwise, it returns false.
+*/
 //1. Does every character have blue eyes?
-const everyBlueEyes = (array) => {
+const blueEyes = (array) => {
     return array.every((item) => item.eye_color === 'blue');
 }
-console.log(everyBlueEyes(characters));
+console.log(blueEyes(characters));
 //2. Does every character have mass more than 40?
-const everyMass40 = (array) => {
-    return array.every((item) => item.mass > 40);
+const massGT400 = (array) => {
+    return array.every((item) => item.mass > 400);
 }
-console.log(everyMass40(characters));
+console.log(massGT400(characters));
 //3. Is every character shorter than 200?
-const everyHeightLT200 = (array) => {
+const heightLT200 = (array) => {
     return array.every((item) => item.height < 200);
 }
-console.log(everyHeightLT200(characters));
+console.log(heightLT200(characters));
 //4. Is every character male?
-const everyCharMale = (array) => {
+const isEveryMale = (array) => {
     return array.every((item) => item.gender === 'male');
 }
-console.log(everyCharMale(characters));
+console.log(isEveryMale(characters));
 
-
-//***SOME***
+//***SOME*** //Keyword: atleast
+/* 
+The some() method tests whether at least one element in the array passes the test implemented by the provided function. It iterates over each element of the array and applies the provided function to each element. If the function returns true for at least one element, some() returns true; otherwise, it returns false.
+*/
 //1. Is there at least one male character?
-const atleastOneMale = (array) => {
+const oneMale = (array) => {
     return array.some((item) => item.gender === 'male');
 }
-console.log(atleastOneMale(characters));
+console.log(oneMale(characters));
 //2. Is there at least one character with blue eyes?
-const atleastOneBEyes = (array) => {
+const oneBlueEyes = (array) => {
     return array.some((item) => item.eye_color === 'blue');
 }
-console.log(atleastOneBEyes(characters));
+console.log(oneBlueEyes(characters));
 //3. Is there at least one character taller than 210?
-const atleastOneHeightGT210 = (array) => {
+const oneHeightGT210 = (array) => {
     return array.some((item) => item.height > 210);
 }
-console.log(atleastOneHeightGT210(characters));
+console.log(oneHeightGT210(characters));
 //4. Is there at least one character that has mass less than 50?
-const atleastOneMassLT50 = (array) => {
+const oneMassLT50 = (array) => {
     return array.some((item) => item.mass < 50);
 }
-console.log(atleastOneMassLT50(characters));
+console.log(oneMassLT50(characters));
